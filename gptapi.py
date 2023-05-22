@@ -1,5 +1,5 @@
 import openai
-
+import extract10relevantArticlesURLs
 # Set up an array to store the replies
 replies = []
 
@@ -90,4 +90,4 @@ for reply in replies:
     
 
 # This is the list of prompts we need to send in order to receive the list of tweets, BTW the function get_top_political_article_urls() is not here, but in the file extract10relevantArticlesURLs.py
-prompts_by_Or = ["I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you as a prompt later.", get_top_political_article_urls(), "generate a few short twitter respones to this topic. Remember that the trumpist view and the Alexandria Ocasio-Cortez always have opposite opinions on topics. once with a Trumpist view ,once with a Ted Cruz view ,once with a Jow Biden view ,once with a Alexandria Ocasio-Cortez view"]
+prompts_by_Or = ["I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you as a prompt later.", extract10relevantArticlesURLs.get_top_political_article_urls(), "generate a few short twitter respones to this topic. Remember that the trumpist view and the Alexandria Ocasio-Cortez always have opposite opinions on topics. once with a Trumpist view ,once with a Ted Cruz view ,once with a Jow Biden view ,once with a Alexandria Ocasio-Cortez view"]
