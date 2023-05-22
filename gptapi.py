@@ -23,6 +23,7 @@ def generate_and_store_prompt(prompt):
     # Store the reply in the array
     replies.append(reply)
 
+    
 # usage
 prompt_array = []
 
@@ -35,6 +36,8 @@ phase3_array = ["White Supremacist", "Libertarian conservative" ,"Fascist", "Mod
 phase4_array = ["White Supremacist", "Evangelicalist" ,"Fascist", "Trumpist" ,"Moderate" ,"liberal", "Progressive", "communist" , "antifa member" , "Anarcho-communist"]
 
 phases = [phase1_array, phase2_array, phase3_array]
+
+
 
 def prompts_generator(phases, prompt_array):
     for i in range(4):
