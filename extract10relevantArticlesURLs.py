@@ -10,6 +10,7 @@ def are_words_in_url(url, words):
             return False
     return True
 
+# return a large string which contains 10 relevant and political articles, every URL in a new line
 def get_top_political_article_urls():
     url = 'https://newsapi.org/v2/top-headlines'
     params = {
@@ -32,6 +33,10 @@ def get_top_political_article_urls():
         if (article_url and are_words_in_url(article_url, bad_words)):
             top_article_urls.append(article_url)
 
-    return top_article_urls[:10]
+    string_with_newlines = '\n'.join(top_article_urls[:10])
+
+    return string_with_newlines
+
+print(get_top_political_article_urls())
 
 
