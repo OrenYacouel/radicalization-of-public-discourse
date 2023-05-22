@@ -32,12 +32,6 @@ def get_top_political_article_urls():
         if (article_url and are_words_in_url(article_url, bad_words)):
             top_article_urls.append(article_url)
 
-    return top_article_urls
+    return top_article_urls[:10]
 
-# Call the function to get the top 10 political article URLs
-political_article_urls = get_top_political_article_urls()
-
-# Print the URLs
-for i in range(10):
-    print(political_article_urls[i])
 
