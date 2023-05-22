@@ -27,7 +27,9 @@ def generate_and_store_prompt(prompt):
 prompt_array = []
 
 phase1_array = ["Libertarian conservative" ,"Conservative", "Liberal Republicans" , "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive", "Democratic Socialist" , "Antifa member" , "Anarcho-communist"]
+
 phase2_array = ["White Supremacist", "Libertarian conservative" ,"Conservative", "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive","Democratic Socialist" , "antifa member" , "Anarcho-communist"]
+
 phase3_array = ["White Supremacist", "Libertarian conservative" ,"Fascist", "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive","Socialist" , "antifa member" , "Anarcho-communist"]
 phase4_array = ["White Supremacist", "Evangelicalist" ,"Fascist", "Trumpist" ,"Moderate" ,"liberal", "Progressive", "communist" , "antifa member" , "Anarcho-communist"]
 phases = [phase1_array, phase2_array, phase3_array]
