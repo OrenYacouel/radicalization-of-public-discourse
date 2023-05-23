@@ -6,7 +6,7 @@ import api_keys
 replies = []
 
 # Set up your OpenAI API credentials
-openai_api_key = api_keys.openai_api_key
+openai.api_key = api_keys.openai_api_key
 
 # Generate prompts and store replies in the array
 def generate_and_store_prompt(prompt):
