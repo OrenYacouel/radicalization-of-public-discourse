@@ -17,4 +17,4 @@ def tweet(api, tweet, image_path=None):
 
 if __name__ == "__main__":
     api = api()
-    tweet(api, "This was tweeted from the api")
+    tweet(api, "Hello, Twitter!")
