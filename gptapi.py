@@ -1,12 +1,12 @@
 import openai
 import extract10relevantArticlesURLs
-import keys
+import api_keys
 
 # Set up an array to store the replies
 replies = []
 
 # Set up your OpenAI API credentials
-keys.openai_api_key ="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"
+api_keys.openai_api_key ="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"
 
 # Generate prompts and store replies in the array
 def generate_and_store_prompt(prompt):

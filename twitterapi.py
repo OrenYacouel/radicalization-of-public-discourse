@@ -1,9 +1,9 @@
 import tweepy
-import keys
+import api_keys
 
 def api():
-    auth = tweepy.OAuthHandler(keys.barakadizibros.apikey, keys.barakadizibros.api_secret)
-    auth.set_access_token(keys.barakadizibros.access_token, keys.barakadizibros.access_token_secret)
+    auth = tweepy.OAuthHandler(api_keys.barakadizibros.apikey, api_keys.barakadizibros.api_secret)
+    auth.set_access_token(api_keys.barakadizibros.access_token, api_keys.barakadizibros.access_token_secret)
     api = tweepy.API(auth)
     return api
 
