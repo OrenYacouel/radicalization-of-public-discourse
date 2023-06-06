@@ -37,6 +37,5 @@ def get_top_political_article_urls():
 
     return string_with_newlines
 
-print(get_top_political_article_urls())
 
 

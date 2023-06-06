@@ -1,20 +1,12 @@
 import tweepy
 import api_keys
 
-def api():
-    auth = tweepy.OAuthHandler(api_keys.barakadizibros.apikey, api_keys.barakadizibros.api_secret)
-    auth.set_access_token(api_keys.barakadizibros.access_token, api_keys.barakadizibros.access_token_secret)
-    api = tweepy.API(auth)
-    return api
-
-def tweet(api, tweet, image_path=None):
-    if image_path:
-        api.update_status_with_media(tweet, image_path)
-    else:
-        api.update_status(tweet)
-    print("Tweeted: " + tweet)
+client = tweepy.Client(consumer_key=api_keys.ruvenovedvsadler.apikey,
+                    consumer_secret=api_keys.ruvenovedvsadler.api_secret,
+                    access_token=api_keys.ruvenovedvsadler.access_token,
+                    access_token_secret=api_keys.ruvenovedvsadler.access_token_secret)
 
 
-if __name__ == "__main__":
-    api = api()
-    tweet(api, "Hello, Twitter!")
+
+# Replace the text with whatever you want to Tweet about
+response = client.create_tweet(text='I believe Yesod Hamaala is the best place in the world')

@@ -29,21 +29,23 @@ def generate_and_store_prompt(prompt):
 # usage
 prompt_array = []
 
-phase1_array = ["Libertarian conservative" ,"Conservative", "Liberal Republicans" , "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive", "Democratic Socialist" , "Antifa member" , "Anarcho-communist"]
+phase1_array = ["Liberal Republican", "Moderate Conservative" ,"Moderate" ,"liberal", "Democratic Socialist"]
 
-phase2_array = ["White Supremacist", "Libertarian conservative" ,"Conservative", "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive","Democratic Socialist" , "antifa member" , "Anarcho-communist"]
+phase2_array = ["Conservative", "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive"]
 
-phase3_array = ["White Supremacist", "Libertarian conservative" ,"Fascist", "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive","Socialist" , "antifa member" , "Anarcho-communist"]
+phase3_array = ["Libertarian conservative" ,"Conservative" ,"Moderate" ,"liberal", "antifa member"]
 
-phase4_array = ["White Supremacist", "Evangelicalist" ,"Fascist", "Trumpist" ,"Moderate" ,"liberal", "Progressive", "communist" , "antifa member" , "Anarcho-communist"]
+phase4_array = ["Libertarian conservative" ,"Trumpist", "Moderate Conservative", "Socialist" , "antifa member" , ]
 
-phases = [phase1_array, phase2_array, phase3_array]
+phase5_array = ["White Supremacist", "Trumpist" ,"Conservative" ,"Anarcho-communist", "antifa member"]
+
+phases = [phase1_array, phase2_array, phase3_array, phase4_array, phase5_array]
 
 
 
 def prompts_generator(phases, prompt_array):
     for i in range(4):
-        prompt = "Generate a few short twitter respones to the most hot topic on current affairs , each tweet representing a different political view. Remember that the right wing and the left wing always have opposite opinions on topics. here are the political views: \n"
+        prompt = "Generate a few short twitter responses to the most hot topic on current affairs , each tweet representing a different political view. Remember that the right wing and the left wing always have opposite opinions on topics. here are the political views: \n"
         num = 0
         for word in phases[i]:
             prompt = switch(num, prompt)
@@ -92,4 +94,4 @@ for reply in replies:
     
 
 # This is the list of prompts we need to send in order to receive the list of tweets, BTW the function get_top_political_article_urls() is not here, but in the file extract10relevantArticlesURLs.py
-prompts_by_Or = ["I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you as a prompt later.", extract10relevantArticlesURLs.get_top_political_article_urls(), "generate a few short twitter respones to this topic. Remember that the trumpist view and the Alexandria Ocasio-Cortez always have opposite opinions on topics. once with a Trumpist view ,once with a Ted Cruz view ,once with a Jow Biden view ,once with a Alexandria Ocasio-Cortez view"]
+prompts_by_Or = ["I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you later as a prompt. ", extract10relevantArticlesURLs.get_top_political_article_urls(), "generate a few short twitter respones to this topic. Remember that the trumpist view and the Alexandria Ocasio-Cortez always have opposite opinions on topics. once with a Trumpist view ,once with a Ted Cruz view ,once with a Jow Biden view ,once with a Alexandria Ocasio-Cortez view"]
