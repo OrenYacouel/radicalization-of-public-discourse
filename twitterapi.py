@@ -9,4 +9,4 @@ client = tweepy.Client(consumer_key=api_keys.ruvenovedvsadler.apikey,
 
 
 # Replace the text with whatever you want to Tweet about
-response = client.create_tweet(text='I believe Yesod Hamaala is the best place in the world')
+response = client.create_tweet(text='2')

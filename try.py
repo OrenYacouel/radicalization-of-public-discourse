@@ -1,6 +1,8 @@
 import openai
 import api_keys
 import extract10relevantArticlesURLs
+# import twitterapi
+import tweepy
 
 # Set up an array to store the replies
 replies = []
@@ -36,47 +38,39 @@ def parse_twitter_responses(response_string):
 
     return response_dict
 
-prompt1 = "I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you as a prompt later."
-prompt2 = extract10relevantArticlesURLs.get_top_political_article_urls
-prompt3 = """i will present to you 5 political views, Remember that the right wing and the left wing always have opposite opinions on topics. 
+prompt_start = "I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you as a prompt later."
+urls = extract10relevantArticlesURLs.get_top_political_article_urls()
+
+
+phase1_array = ["Liberal Republican", "Moderate Conservative" ,"Moderate" ,"liberal", "Democratic Socialist"]
+
+phase2_array = ["Conservative", "Moderate Conservative" ,"Moderate" ,"liberal", "Progressive"]
+
+phase3_array = ["Libertarian conservative" ,"Conservative" ,"Moderate" ,"liberal", "antifa member"]
+
+phase4_array = ["Libertarian conservative" ,"Trumpist", "Moderate Conservative", "Socialist" , "antifa member" , ]
+
+phase5_array = ["White Supremacist", "Trumpist" ,"Conservative" ,"Anarcho-communist", "antifa member"]
+
+phases = [phase1_array, phase2_array, phase3_array, phase4_array, phase5_array]
+
+bots_array = [api_keys.dudaTahorLaad, api_keys.oranHaMehandes, api_keys.habiltiNigmar, api_keys.ruvenovedvsadler, api_keys.luriethebrit]
+
+prompt_end = """
+
+I will present to you 5 political views, Remember that the right wing and the left wing always have opposite opinions on topics. 
 here are the political views: 
-1. "Libertarian conservative" ,2."Conservative", 3."Liberal Republicans" ,4. "Moderate Conservative" ,5."Moderate" 
+1. "Liberal Republican" ,2."Moderate Conservative", 3."Moderate" ,4. "liberal" ,5."Democratic Socialist"
 
  for each view, write 3 twitter responses based on the articles you have read above. remember that a twitter response should be no longer than 220 characters.
 your reply should be in the following template:
-1. "Libertarian conservative":
+1. "Liberal Republican":
 response 1:
 response 2:
 response 3:
 and so on."""
 
-final_prompt = """
-I want you to read a few articles I will send to you, and then respond in a few different ways i will write to you:
-
-https://www.bbc.com/news/world-europe-65662563
-https://abcnews.go.com/US/3-dead-kansas-city-lounge-shooting/story?id=99487967
-https://www.usatoday.com/story/news/world/2023/05/21/ukraine-russia-war-live-updates/70240834007/
-https://www.space.com/spacex-ax-2-private-axiom-space-launch-what-time
-https://thehill.com/homenews/campaign/4014220-senate-republican-i-dont-think-trump-can-win-a-general-election/
-https://apnews.com/article/g7-japan-hiroshima-ukraine-biden-zelenskyy-kishida-59b037197eef2d36cbbe882f0378ac99
-https://www.reuters.com/technology/chinas-regulator-says-finds-serious-security-issues-us-micron-technologys-2023-05-21/
-https://www.cnn.com/2023/05/21/politics/debt-ceiling-talks-biden-mccarthy/index.html
-https://www.cnbc.com/2023/05/21/ford-capital-markets-convince-wall-street-skeptics.html
-https://www.wsbtv.com/news/local/atlanta/rise-kiahyundai-thefts-comes-same-time-local-womans-class-action-lawsuit/NG6FZVRNRBBU5P4X7GVXB2UJDA/
-
-
-i will present to you 5 political views, Remember that the right wing and the left wing always have opposite opinions on topics. 
-here are the political views: 
-1. "Libertarian conservative" ,2."Conservative", 3."Liberal Republicans" ,4. "Moderate Conservative" ,5."Moderate" 
-
- for each view, write 3 twitter responses based on the articles you have read above. remember that a twitter response should be no longer than 220 characters.
-your reply should be in the following template:
-1. "Libertarian conservative":
-response 1:
-response 2:
-response 3:
-and so on."""
-
+final_prompt = prompt_start + urls + prompt_end
 
 # this function returns the string that chatgpt built that has the tweets, with the right template
 def get_tweets_strings():
@@ -101,6 +95,41 @@ def dict_maker_from_string(input_string):
             response_array.append(response)
         responses[political_view] = response_array
     return responses
+
+
+
+parsed_responses = dict_maker_from_string(get_tweets_strings())
+print (parsed_responses)
+
+# this function will take the parsed responses that are in a dictionary and each bot will publish its tweets
+def publish_tweets(parsed_responses):
+    # print(parsed_responses)
+    # the first loop will publish each **4 hours** a tweet from each political view (each bot)
+    # for i in range (3):
+        # now we will go through each bot and publish a tweet from it
+        # TODO indentation here
+    j = 0
+    for view in parsed_responses:
+        bot = bots_array[j]
+         # TODO i instead of 0
+        tweet = parsed_responses[view][0]
+        #remove the "response _:" from the tweet
+        # TODO str(i+1) instead of str(1) 
+        tweet = tweet.removeprefix('Response ' + str(1) + ':')
+        #publish the tweet
+        client = tweepy.Client(consumer_key=bot.apikey,
+                consumer_secret=bot.api_secret,
+                access_token=bot.access_token,
+                access_token_secret=bot.access_token_secret)
+        
+        # Replace the text with whatever you want to Tweet about
+        response = client.create_tweet(text=tweet)
+        print("Tweet published successfully from bot " + bot.name + " with the text: " + tweet)
+        j += 1
+
+
+publish_tweets(parsed_responses)
+
 
 
 # Example usage:
@@ -130,8 +159,3 @@ response 1: "Ensuring individual freedoms while maintaining public safety is cru
 response 2: "Engaging in diplomacy and international cooperation is vital to de-escalate the Ukraine-Russia conflict and prevent further bloodshed. #Moderate"
 response 3: "Biden's focus on infrastructure investment can stimulate the economy and create jobs. Bipartisan support is crucial for its success. #Moderate"
 '''
-
-
-
-parsed_responses = dict_maker_from_string(get_tweets_strings())
-print(parsed_responses)
